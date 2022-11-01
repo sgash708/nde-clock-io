@@ -25,6 +25,7 @@ gobuild:
 
 .PHONY: m-gobuild
 m-gobuild:
+	cp config.yml bin/
 	go build -o ./bin/ndeio cmd/nde-clock-io/main.go
 
 .PHONY: run-in

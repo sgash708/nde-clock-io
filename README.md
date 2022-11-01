@@ -13,8 +13,6 @@ Secret:
   Email: example@example.com
   Password: password
 ##### endline ######
-
-$ cp config.yml ./bin/
 ```
 
 ## Require
