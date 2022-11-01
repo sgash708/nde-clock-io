@@ -54,7 +54,6 @@ func (s *Site) ClockIn() error {
 }
 
 func (s *Site) ClockOut() error {
-	//*[@id="ctl00_ContentPlaceHolder1_ibtnOut4"]
 	if err := page.FindByXPath(`//*[@id="ctl00_ContentPlaceHolder1_ibtnOut4"]`).Click(); err != nil {
 		return err
 	}
