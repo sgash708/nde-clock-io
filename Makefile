@@ -20,6 +20,7 @@ exec:
 
 .PHONY: gobuild
 gobuild:
+	cp config.yml bin/
 	GOOS=linux go build -ldflags="-s -w" -o ./bin/ndeio cmd/nde-clock-io/main.go
 
 .PHONY: m-gobuild
