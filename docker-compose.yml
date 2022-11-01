@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  ngo:
+    container_name: ngo
+    build:
+      context: .
+      dockerfile: docker/go/Dockerfile
+    tty: true
+    ports:
+      - 3030:3030
+    volumes:
+      - .:/go/src
+
+  precommit:
+    container_name: precommit
+    build:
+      context: .
+      dockerfile: docker/go/Dockerfile
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: cp pre-commit .git/hooks/pre-commit
