@@ -15,10 +15,14 @@ var driver *agouti.WebDriver
 func StartDriver(url string) *agouti.WebDriver {
 	driver = agouti.ChromeDriver(
 		agouti.ChromeOptions("args", []string{
-			// "--disable-gpu",
-			// "--headless",
-			// "--start-maximized",
+			"--no-sandbox",
+			"--headless",
+			"--disable-gpu",
+			"--disable-dev-shm-usage",
+			"--whitelisted-ips",
+			"--disable-extensions",
 		}),
+		agouti.Debug,
 	)
 	err := driver.Start()
 	if err != nil {
