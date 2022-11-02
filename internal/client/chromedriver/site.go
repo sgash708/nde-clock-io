@@ -25,18 +25,17 @@ func NewSite(password, userID string) ISite {
 
 func (s *Site) Login() error {
 	time.Sleep(3 * time.Second)
-	// Fill
 	if err := page.FindByXPath(`//*[@id="txtID"]`).Fill(s.UserID); err != nil {
 		return err
 	}
 	if err := page.FindByXPath(`//*[@id="txtPsw"]`).Fill(s.Password); err != nil {
 		return err
 	}
-	// Click
 	if err := page.FindByXPath(`//*[@id="btnLogin"]`).Click(); err != nil {
 		return err
 	}
 	time.Sleep(2 * time.Second)
+
 	if err := page.FindByXPath(`//*[@id="ctl00_ContentPlaceHolder1_imgBtnSyuugyou"]`).Click(); err != nil {
 		return err
 	}
@@ -49,6 +48,7 @@ func (s *Site) ClockIn() error {
 	if err := page.FindByXPath(`//*[@id="ctl00_ContentPlaceHolder1_ibtnIn3"]`).Click(); err != nil {
 		return err
 	}
+	time.Sleep(5 * time.Second)
 
 	return nil
 }
@@ -57,6 +57,7 @@ func (s *Site) ClockOut() error {
 	if err := page.FindByXPath(`//*[@id="ctl00_ContentPlaceHolder1_ibtnOut4"]`).Click(); err != nil {
 		return err
 	}
+	time.Sleep(5 * time.Second)
 
 	return nil
 }
