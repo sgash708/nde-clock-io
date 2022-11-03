@@ -8,7 +8,7 @@ ENV ARCH amd64
 ENV GOVERSION 1.17
 
 RUN apt update \
-    && apt install -y wget curl unzip make tzdata software-properties-common ca-certificates gcc libfontconfig libxkbcommon0 libatspi2.0-0 libgbm1 libnss3 libgconf-2-4 \
+    && apt install -y wget curl unzip make tzdata software-properties-common ca-certificates gcc libfontconfig libxkbcommon0 libatspi2.0-0 libgbm1 libnss3 libgconf-2-4 fonts-ipafont fonts-ipaexfont \
     && curl -s -o /tmp/go.tar.gz https://storage.googleapis.com/golang/go$GOVERSION.linux-$ARCH.tar.gz \
     && tar -C /usr/local -xzf /tmp/go.tar.gz \
     && rm /tmp/go.tar.gz
