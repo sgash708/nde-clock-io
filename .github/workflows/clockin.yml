@@ -22,11 +22,9 @@ jobs:
           make build
           make upd
           echo "${{ secrets.CONFIGYML }}" >> config.yml
-          cp config.yml ./bin/
-          docker-compose exec -T ngo go build -ldflags="-s -w" -o ./bin/ndeio cmd/nde-clock-io/main.go
+          make gobuild
 
-      - name: check holiday
+      - name: check holiday and run
         run: |
           wget https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv
-          date "+%Y/%m/%d"
-          grep `date "+%Y/%m/%d"`, syukujitsu.csv > /dev/null || docker-compose exec -T ngo ./bin/ndeio clockin
+          grep `date "+%Y/%-m/%-d"`, syukujitsu.csv > /dev/null || docker-compose exec -T ngo ./bin/ndeio clockin

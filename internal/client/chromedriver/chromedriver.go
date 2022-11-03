@@ -18,11 +18,6 @@ func StartDriver(url string) *agouti.WebDriver {
 			"--disable-gpu",
 			"--headless",
 			"--no-sandbox",
-			// "--disable-dev-shm-usage",
-			// "lang=ja",
-			// "--disable-desktop-notifications",
-			// "--ignore-certificate-errors",
-			// "--disable-extensions",
 		}),
 		agouti.Debug,
 	)
