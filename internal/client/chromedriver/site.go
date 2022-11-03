@@ -9,6 +9,7 @@ type ISite interface {
 	ClockIn() error
 	ClockOut() error
 	GetTime() string
+	ScreenShot(string) error
 }
 
 type Site struct {
@@ -65,4 +66,9 @@ func (s *Site) ClockOut() error {
 func (s *Site) GetTime() string {
 	content := GetHTML()
 	return content.Find(`#ctl00_ContentPlaceHolder1_lblHour`).Text()
+}
+
+func (s *Site) ScreenShot(fileName string) error {
+
+	return page.Screenshot(fileName)
 }

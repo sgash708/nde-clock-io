@@ -31,8 +31,8 @@ func StartDriver(url string) *agouti.WebDriver {
 		log.Fatalf("Chromeでページが開けません\n詳細: %v", err)
 	}
 
-	// wait 1000 ms
-	if err := page.Session().SetImplicitWait(1000); err != nil {
+	// 5000ms
+	if err := page.Session().SetImplicitWait(5000); err != nil {
 		log.Fatalln(err)
 	}
 
