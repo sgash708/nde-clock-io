@@ -15,9 +15,14 @@ var driver *agouti.WebDriver
 func StartDriver(url string) *agouti.WebDriver {
 	driver = agouti.ChromeDriver(
 		agouti.ChromeOptions("args", []string{
-			"--headless",
 			"--disable-gpu",
-			"--start-maximized",
+			"--headless",
+			"--no-sandbox",
+			"--disable-dev-shm-usage",
+			"lang=ja",
+			"--disable-desktop-notifications",
+			"--ignore-certificate-errors",
+			"--disable-extensions",
 		}),
 		agouti.Debug,
 	)

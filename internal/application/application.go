@@ -24,14 +24,12 @@ func RunClockIn() (err error) {
 
 	site := diChromeDriver()
 	if err := site.Login(); err != nil {
-		log.Println(err)
 		return err
 	}
 	now := site.GetTime()
 	if now == "" {
 		return xerrors.New(NoTimeMsg)
 	}
-
 	if err := site.ClockIn(); err != nil {
 		return err
 	}
@@ -61,14 +59,12 @@ func RunClockOut() (err error) {
 
 	site := diChromeDriver()
 	if err := site.Login(); err != nil {
-		log.Println(err)
 		return err
 	}
 	now := site.GetTime()
 	if now == "" {
 		return xerrors.New(NoTimeMsg)
 	}
-
 	if err := site.ClockOut(); err != nil {
 		return err
 	}

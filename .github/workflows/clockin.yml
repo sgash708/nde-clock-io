@@ -1,0 +1,38 @@
+name: clockin
+
+on:
+  push:
+    branches:
+      - "main"
+  # schedule:
+  #   - cron: '45 8 * * 1-5'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.17
+
+      - name: install chrome
+        run: |
+          sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo apt update
+          sudo apt-get install google-chrome-stable
+
+      - name: install chromedriver
+        run: |
+          CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
+          curl -sS -o /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+          unzip /tmp/chromedriver_linux64.zip
+          mv chromedriver /usr/local/bin/
+
+      - name: check holiday
+        run: |
+          echo ${{ secrets.CONFIGYML }} >> config.yml
+          wget https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv
+          grep `date "+\%Y/\%-m/\%-d"`, syukujitsu.csv > /dev/null || make gobuild && ./bin/ndeio clockin
