@@ -2,7 +2,7 @@ name: clockout
 
 on:
   schedule:
-    - cron: '32 18 * * 1-5'
+    - cron: '32 9 * * 1-5'
 
 env:
   TZ: 'Asia/Tokyo'
@@ -24,4 +24,7 @@ jobs:
       - name: check holiday and run
         run: |
           wget https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv
-          grep `date "+%Y/%-m/%-d"`, syukujitsu.csv > /dev/null || docker-compose exec -T ngo ./bin/ndeio clockout
+          CHECK=$(grep -a `date "+%Y/%-m/%-d"`, syukujitsu.csv)
+          if [ -z "$CHECK" ]; then
+            docker-compose exec -T ngo ./bin/ndeio clockout
+          fi

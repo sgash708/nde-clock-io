@@ -46,10 +46,10 @@ func (s *Site) Login() error {
 }
 
 func (s *Site) ClockIn() error {
+	if err := page.FindByXPath(`//*[@id="ctl00_ContentPlaceHolder1_ibtnIn3"]`).Click(); err != nil {
+		return err
+	}
 	time.Sleep(5 * time.Second)
-	// if err := page.FindByXPath(`//*[@id="ctl00_ContentPlaceHolder1_ibtnIn3"]`).Click(); err != nil {
-	// 	return err
-	// }
 
 	return nil
 }
