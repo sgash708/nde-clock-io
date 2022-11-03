@@ -31,8 +31,12 @@ jobs:
 #           unzip /tmp/chromedriver_linux64.zip
 #           mv chromedriver /usr/local/bin/
 
+      - name: run docker
+        run: |
+          make upd
+
       - name: check holiday
         run: |
           echo "${{ secrets.CONFIGYML }}" >> config.yml
           wget https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv
-          grep `date "+\%Y/\%-m/\%-d"`, syukujitsu.csv > /dev/null || make upd && docker-compose exec ngo go run cmd/nde-clock-io/main.go clockin
+          grep `date "+\%Y/\%-m/\%-d"`, syukujitsu.csv > /dev/null || docker-compose exec ngo go run cmd/nde-clock-io/main.go clockin
