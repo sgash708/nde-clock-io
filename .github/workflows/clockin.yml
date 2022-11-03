@@ -23,7 +23,7 @@ jobs:
           make upd
           echo "${{ secrets.CONFIGYML }}" >> config.yml
           cp config.yml ./bin/
-          docker-compose exec -T ngo GOOS=linux go build -ldflags="-s -w" -o ./bin/ndeio cmd/nde-clock-io/main.go
+          docker-compose exec -T ngo go build -ldflags="-s -w" -o ./bin/ndeio cmd/nde-clock-io/main.go
 
       - name: check holiday
         run: |
