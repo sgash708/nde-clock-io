@@ -1,11 +1,8 @@
 name: clockin
 
 on:
-  # schedule:
-  #   - cron: '45 23 * * 0-4'
-  push:
-    branches:
-      - "main"
+  schedule:
+    - cron: '45 23 * * 0-4'
 
 env:
   TZ: 'Asia/Tokyo'
@@ -16,31 +13,32 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-      
+
       - name: setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16
-
-#       - name: run docker
-#         run: |
-#           make build
-#           make upd
-#           echo "${{ secrets.CONFIGYML }}" >> config.yml
-#           make gobuild
+          cache: "npm"
 
       - name: npm install
         run: npm install @holiday-jp/holiday_jp
 
-      - uses: actions/github-script@v3
+      - name: check holiday
+        uses: actions/github-script@v3
         id: is_holiday
         with:
           script: |
             const holiday_jp = require(`${process.env.GITHUB_WORKSPACE}/node_modules/@holiday-jp/holiday_jp`)
             core.setOutput('holiday', holiday_jp.isHoliday(new Date()));
 
-      - name: run
+      - name: run docker
         if: "${{ steps.is_holiday.outputs.holiday != 'true' }}"
         run: |
-          echo 'test';
-          # docker-compose exec -T ngo ./bin/ndeio clockin;
+          make build
+          make upd
+          echo "${{ secrets.CONFIGYML }}" >> config.yml
+          make gobuild
+
+      - name: run
+        if: "${{ steps.is_holiday.outputs.holiday != 'true' }}"
+        run: docker-compose exec -T ngo ./bin/ndeio clockin
