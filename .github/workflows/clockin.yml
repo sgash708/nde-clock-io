@@ -28,8 +28,9 @@ jobs:
         run: |
           wget https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv
           d=$(date '+%Y/%-m/%-d')
-          echo 'test'
+          echo $d
           holiday=$(grep -a "$d" syukujitsu.csv)
+          echo $holiday
           if [[ -z "$holiday" ]]; then
             echo 'test';
             # docker-compose exec -T ngo ./bin/ndeio clockin;
