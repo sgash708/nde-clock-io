@@ -17,18 +17,19 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: run docker
-        run: |
-          make build
-          make upd
-          echo "${{ secrets.CONFIGYML }}" >> config.yml
-          make gobuild
+#       - name: run docker
+#         run: |
+#           make build
+#           make upd
+#           echo "${{ secrets.CONFIGYML }}" >> config.yml
+#           make gobuild
 
       - name: check holiday and run
         run: |
           wget https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv
-          d=`date '+%Y/%-m/%-d'`
-          holiday=`grep -a "$d" syukujitsu.csv`
+          d=$(date '+%Y/%-m/%-d')
+          echo 'test'
+          holiday=$(grep -a "$d" syukujitsu.csv)
           if [[ -z "$holiday" ]]; then
             echo 'test';
             # docker-compose exec -T ngo ./bin/ndeio clockin;
