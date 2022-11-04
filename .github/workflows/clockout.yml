@@ -1,8 +1,11 @@
 name: clockout
 
 on:
-  schedule:
-    - cron: '32 9 * * 1-5'
+  # schedule:
+  #   - cron: '32 9 * * 1-5'
+  push:
+    branches:
+      - "main"
 
 env:
   TZ: 'Asia/Tokyo'
