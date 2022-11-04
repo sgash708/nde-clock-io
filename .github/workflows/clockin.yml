@@ -29,6 +29,7 @@ jobs:
           wget https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv
           CHECK=$(grep -a `date "+%Y/%-m/%-d"`, syukujitsu.csv)
           echo $CHECK
+          date "+%Y/%-m/%-d"
           # if [ -z "$CHECK" ]; then
             # docker-compose exec -T ngo ./bin/ndeio clockin
           # fi
