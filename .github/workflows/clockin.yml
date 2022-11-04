@@ -27,6 +27,7 @@ jobs:
       - name: check holiday and run
         run: |
           wget https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv
+          echo 'test'
           CHECK=$(grep -a $(date "+%Y/%-m/%-d") syukujitsu.csv)
           if [ -z "$CHECK" ]; then
             echo 'test';
