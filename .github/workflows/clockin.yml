@@ -1,8 +1,11 @@
 name: clockin
 
 on:
-  schedule:
-    - cron: '45 23 * * 0-4'
+  # schedule:
+  #   - cron: '45 23 * * 0-4'
+  push:
+    branches:
+      - "main"
 
 env:
   TZ: 'Asia/Tokyo'
@@ -27,5 +30,5 @@ jobs:
           CHECK=$(grep -a `date "+%Y/%-m/%-d"`, syukujitsu.csv)
           echo $CHECK
           # if [ -z "$CHECK" ]; then
-            docker-compose exec -T ngo ./bin/ndeio clockin
+            # docker-compose exec -T ngo ./bin/ndeio clockin
           # fi
