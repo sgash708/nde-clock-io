@@ -27,8 +27,8 @@ jobs:
       - name: check holiday and run
         run: |
           wget https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv
-          CHECK=`cat syukujitsu.csv | grep -a $(date "+%Y/%-m/%-d")`
-          if [ -z "$CHECK" ]; then
+          CHECK=$(grep -a `date '+%Y/%-m/%-d'` syukujitsu.csv)
+          if [[ -z "$CHECK" ]]; then
             echo 'test';
             # docker-compose exec -T ngo ./bin/ndeio clockin;
           fi
