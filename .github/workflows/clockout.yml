@@ -3,6 +3,7 @@ name: clockout
 on:
   schedule:
     - cron: '32 9 * * 1-5'
+  workflow_dispatch:
 
 env:
   TZ: 'Asia/Tokyo'
