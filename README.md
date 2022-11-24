@@ -10,8 +10,10 @@ $ vi config.yml
 ##### startline ######
 Secret:
   URL: https://example.com
-  Email: example@example.com
+  UserID: 1111111
   Password: password
+  Channel: test-channel
+  Token: xoxb-xxxxxxx-xxxxx
 ##### endline ######
 ```
 
