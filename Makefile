@@ -20,11 +20,13 @@ exec:
 
 .PHONY: gobuild
 gobuild:
+	echo "build for linux"
 	cp config.yml bin/
 	docker-compose exec -T ngo go build -ldflags="-s -w" -o ./bin/ndeio cmd/nde-clock-io/main.go
 
 .PHONY: m-gobuild
 m-gobuild:
+	echo "build for mac"
 	cp config.yml bin/
 	go build -o ./bin/ndeio cmd/nde-clock-io/main.go
 
