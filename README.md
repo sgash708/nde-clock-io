@@ -18,7 +18,11 @@ Secret:
 ```
 
 ## Require
-Chromedriver
+- Chromedriver
+- Slack
+  - channel
+  - token
+
 ### linux
 ```bash
 $ CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
