@@ -10,7 +10,10 @@ import (
 	"golang.org/x/xerrors"
 )
 
-const NoTimeMsg = "not exist time."
+const (
+	NoTimeMsg  = "not exist time."
+	HolidayMsg = "today is a holiday."
+)
 
 func RunClockIn() (err error) {
 	d := chromedriver.StartDriver(config.Conf.Secret.URL)
@@ -23,23 +26,36 @@ func RunClockIn() (err error) {
 	}()
 
 	site := diChromeDriver()
-	if err := site.Login(); err != nil {
+	if err = site.Login(); err != nil {
 		return err
 	}
+
+	holidayFlg, err := site.IsHoliday()
+	if err != nil {
+		return err
+	}
+	if holidayFlg {
+		log.Printf("clock in: %v\n", HolidayMsg)
+		return nil
+	}
+	if err = site.DoBackTopPage(); err != nil {
+		return err
+	}
+
 	now := site.GetTime()
 	if now == "" {
 		return xerrors.New(NoTimeMsg)
 	}
-	if err := site.ClockIn(); err != nil {
+	if err = site.ClockIn(); err != nil {
 		return err
 	}
 
 	fileName := util.GetTimeFileName()
-	if err := site.ScreenShot(fileName); err != nil {
+	if err = site.ScreenShot(fileName); err != nil {
 		return err
 	}
 	sl := diSlack()
-	if err := sl.UploadFile(fileName); err != nil {
+	if err = sl.UploadFile(fileName); err != nil {
 		return err
 	}
 	log.Printf("clock in: %v\n", now)
@@ -58,23 +74,36 @@ func RunClockOut() (err error) {
 	}()
 
 	site := diChromeDriver()
-	if err := site.Login(); err != nil {
+	if err = site.Login(); err != nil {
 		return err
 	}
+
+	holidayFlg, err := site.IsHoliday()
+	if err != nil {
+		return err
+	}
+	if holidayFlg {
+		log.Printf("clock in: %v\n", HolidayMsg)
+		return nil
+	}
+	if err = site.DoBackTopPage(); err != nil {
+		return err
+	}
+
 	now := site.GetTime()
 	if now == "" {
 		return xerrors.New(NoTimeMsg)
 	}
-	if err := site.ClockOut(); err != nil {
+	if err = site.ClockOut(); err != nil {
 		return err
 	}
 
 	fileName := util.GetTimeFileName()
-	if err := site.ScreenShot(fileName); err != nil {
+	if err = site.ScreenShot(fileName); err != nil {
 		return err
 	}
 	sl := diSlack()
-	if err := sl.UploadFile(fileName); err != nil {
+	if err = sl.UploadFile(fileName); err != nil {
 		return err
 	}
 	log.Printf("clock out: %v\n", now)
