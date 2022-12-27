@@ -71,7 +71,6 @@ func (s *Site) IsHoliday() (bool, error) {
 		isHoliday = true
 		return isHoliday, nil
 	}
-	fmt.Println(colorCode, remarksText)
 
 	return isHoliday, nil
 }

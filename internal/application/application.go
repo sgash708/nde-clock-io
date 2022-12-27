@@ -83,7 +83,7 @@ func RunClockOut() (err error) {
 		return err
 	}
 	if holidayFlg {
-		log.Printf("clock in: %v\n", HolidayMsg)
+		log.Printf("clock out: %v\n", HolidayMsg)
 		return nil
 	}
 	if err = site.DoBackTopPage(); err != nil {
