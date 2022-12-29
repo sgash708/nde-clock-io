@@ -12,7 +12,7 @@ import (
 
 const (
 	NoTimeMsg  = "not exist time."
-	HolidayMsg = "today is a holiday."
+	HolidayMsg = "have a nice day. this is a holiday."
 )
 
 func RunClockIn() (err error) {
