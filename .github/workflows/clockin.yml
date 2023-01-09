@@ -42,5 +42,4 @@ jobs:
       - name: run
         if: "${{ steps.is_holiday.outputs.holiday != 'true' }}"
         run: |
-          echo "stop"
-          # docker-compose exec -T ngo ./bin/ndeio clockin
+          docker-compose exec -T ngo ./bin/ndeio clockin
