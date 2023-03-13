@@ -56,7 +56,7 @@ $ ./ndeio clockin
 ```
 
 ### crontab
-in ubuntu server
+in ubuntu server...
 
 ```
 $ cd
