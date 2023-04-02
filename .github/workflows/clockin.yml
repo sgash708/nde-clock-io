@@ -1,8 +1,8 @@
 name: clockin
 
 on:
-  schedule:
-    - cron: '45 23 * * 0-4'
+  # schedule:
+  #   - cron: '45 23 * * 0-4'
   workflow_dispatch:
 
 env:
