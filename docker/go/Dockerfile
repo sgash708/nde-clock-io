@@ -21,9 +21,9 @@ RUN mkdir -p /home/root/src \
 
 RUN rm -rf /tmp/* /usr/local/bin/chromedriver
 
-# 緊急対応
-# パッケージがないため互換性のあるバージョンをハードコード
-RUN curl -sS -o /tmp/chromedriver-linux64.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip \
+# ChromeのバージョンでtestingToolからインストール
+RUN CHROME_VERSION=`google-chrome-stable --version | sed 's/Google Chrome //g' | sed 's/ //g'` \
+    && curl -sS -o /tmp/chromedriver-linux64.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip \
     && unzip /tmp/chromedriver-linux64.zip \
     && mv /chromedriver-linux64/chromedriver /usr/local/bin/
 
