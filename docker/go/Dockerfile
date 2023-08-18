@@ -19,12 +19,12 @@ RUN mkdir -p /home/root/src \
     && apt-get update -qq \
     && apt-get install -y google-chrome-stable
 
-RUN rm -rf /tmp/*
+RUN rm -rf /tmp/* /usr/local/bin/chromedriver
 
 # 緊急対応
 # パッケージがないため互換性のあるバージョンをハードコード
-RUN curl -sS -o /tmp/chromedriver_linux64.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip \
-    && unzip /tmp/chromedriver_linux64.zip \
-    && mv chromedriver /usr/local/bin/
+RUN curl -sS -o /tmp/chromedriver-linux64.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip \
+    && unzip /tmp/chromedriver-linux64.zip \
+    && mv /chromedriver-linux64/chromedriver /usr/local/bin/
 
 WORKDIR /go/src
