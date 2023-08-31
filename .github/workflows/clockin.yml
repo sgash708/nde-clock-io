@@ -42,7 +42,7 @@ jobs:
           echo "${{ secrets.CONFIGYML }}" >> config.yml
           make gobuild
 
-      # - name: run
-      #   if: "${{ steps.is_holiday.outputs.holiday != 'true' }}"
-      #   run: |
-      #     docker-compose exec -T ngo ./bin/ndeio clockin
+      - name: run
+        if: "${{ steps.is_holiday.outputs.holiday != 'true' }}"
+        run: |
+          docker-compose exec -T ngo ./bin/ndeio clockin
