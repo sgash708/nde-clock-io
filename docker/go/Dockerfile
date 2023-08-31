@@ -21,7 +21,8 @@ RUN mkdir -p /home/root/src \
 
 RUN rm -rf /tmp/* /usr/local/bin/chromedriver
 
-# ChromeのバージョンでtestingToolからインストール
+# NOTE: ChromeのバージョンでtestingToolからインストール
+# stableのマイナーバージョンが存在がまちまちで安定しなかったりする
 # RUN CHROME_VERSION=`google-chrome-stable --version | sed 's/Google Chrome //g' | sed 's/ //g'` \
 #     && echo $CHROME_VERSION \
 
