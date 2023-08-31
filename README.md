@@ -19,6 +19,7 @@ Secret:
 
 ## Require
 - Chromedriver
+  - [check your version](https://googlechromelabs.github.io/chrome-for-testing/)
 - Slack
   - channel
   - token

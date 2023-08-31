@@ -22,9 +22,11 @@ RUN mkdir -p /home/root/src \
 RUN rm -rf /tmp/* /usr/local/bin/chromedriver
 
 # ChromeのバージョンでtestingToolからインストール
-RUN CHROME_VERSION=`google-chrome-stable --version | sed 's/Google Chrome //g' | sed 's/ //g'` \
-    && echo $CHROME_VERSION \
-    && curl -sS -o /tmp/chromedriver-linux64.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip \
+# RUN CHROME_VERSION=`google-chrome-stable --version | sed 's/Google Chrome //g' | sed 's/ //g'` \
+#     && echo $CHROME_VERSION \
+
+# FIX: 230831 stableバージョンが追いついていないため
+RUN curl -sS -o /tmp/chromedriver-linux64.zip https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip \
     && unzip /tmp/chromedriver-linux64.zip \
     && mv /chromedriver-linux64/chromedriver /usr/local/bin/
 
